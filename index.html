@@ -158,7 +158,6 @@
   .stage { position: absolute; left: 0; bottom: 0; width: var(--sw); aspect-ratio: 16 / 9; }
   .stage > * { position: absolute; }
   .stage > img { max-width: none; height: auto; }
-  .name-m { display: none; }
   .host .figure { transform: translateY(3%); transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1); }
   .host.is-on .figure { transform: none; }
 
@@ -234,13 +233,6 @@
     .tile .logo { width: 34%; }
     .kit { grid-template-columns: minmax(0, 1fr); }
     .swatches { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 20px; }
-    .rooms { aspect-ratio: auto; height: 82svh; }
-    .host { --sw: calc(60svh * 16 / 9); }
-    .stage { left: calc(50cqw - var(--cx) * var(--sw)); }
-    .stage .name, .stage .logo { display: none; }
-    .name-m { display: block; position: absolute; z-index: 1; top: 5svh; left: 50%; width: min(70cqw, 320px); height: auto; transform: translateX(-50%); }
-    .giorgos .name-m { top: calc(var(--sw) * 0.0625 + 2svh); }
-    .step { top: auto; bottom: 16px; margin: 0; }
     .planfig .tag { position: static; max-width: none; margin-bottom: 20px; }
     .planfig { aspect-ratio: auto; }
     .planfig .floor, .planfig .set, .planfig svg { position: static; }
@@ -248,6 +240,17 @@
     .planfig .set { width: 62%; height: auto; margin-top: 16px; border: 4px solid var(--mark); }
     .planfig svg { display: none; }
     .thumbs { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+  /* narrow screens: crop the stage around the presenter, nameplate stays on them */
+  @media (max-width: 640px) {
+    .rooms { aspect-ratio: auto; height: 68svh; }
+    .host { --sw: min(calc(62svh * 16 / 9), 232cqw); }
+    .stage { left: calc(50cqw - var(--cx) * var(--sw)); }
+    .stage .logo { display: none; }
+    .elena .name { left: 38%; top: 69%; width: 27%; }
+    .giorgos .name { left: 46%; top: 62%; width: 27%; }
+    .nikolas .name { left: 39%; top: 70%; width: 27%; }
+    .step { top: 16px; margin: 0; }
   }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
@@ -334,7 +337,6 @@
   </section>
   <div class="rooms">
     <div class="host elena is-on" id="room-elena" role="tabpanel" aria-labelledby="tab-elena">
-      <img class="name-m" src="assets/name-elena.png" alt="">
       <div class="stage">
         <img class="prop" src="assets/prop-frame.webp" alt="">
         <img class="figure" src="assets/elena.webp" alt="Η Έλενα Παπαδοπούλου">
@@ -343,7 +345,6 @@
       </div>
     </div>
     <div class="host giorgos" id="room-giorgos" role="tabpanel" aria-labelledby="tab-giorgos">
-      <img class="name-m" src="assets/name-giorgos.png" alt="">
       <div class="stage">
         <img class="prop" src="assets/prop-tv.webp" alt="">
         <img class="figure" src="assets/giorgos.webp" alt="Ο Γιώργος Μαραθιανός">
@@ -352,7 +353,6 @@
       </div>
     </div>
     <div class="host nikolas" id="room-nikolas" role="tabpanel" aria-labelledby="tab-nikolas">
-      <img class="name-m" src="assets/name-nikolas.png" alt="">
       <div class="stage">
         <img class="prop" src="assets/prop-phone.webp" alt="">
         <img class="figure" src="assets/nikolas.webp" alt="Ο Νικόλας Ακτύπης">
